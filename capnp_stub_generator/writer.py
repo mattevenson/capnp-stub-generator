@@ -456,6 +456,9 @@ class Writer:
         init_choices: list[InitChoice] = []
         slot_fields: list[helper.TypeHintedVariable] = []
 
+        for child_node in schema.node.nestedNodes:
+            self.generate_nested(schema.get_nested(child_node.name))
+
         for field, raw_field in zip(schema.node.struct.fields, schema.as_struct().fields_list):
             field_type = field.which()
 
@@ -653,6 +656,7 @@ class Writer:
         node_type = schema.node.which()
 
         if node_type == "const":
+            # import ipdb; ipdb.set_trace()
             self.gen_const(schema)
 
         elif node_type == "struct":
