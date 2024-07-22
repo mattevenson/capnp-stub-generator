@@ -656,7 +656,6 @@ class Writer:
         node_type = schema.node.which()
 
         if node_type == "const":
-            # import ipdb; ipdb.set_trace()
             self.gen_const(schema)
 
         elif node_type == "struct":
